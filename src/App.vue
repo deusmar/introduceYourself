@@ -13,12 +13,12 @@
         <button class="btn btn-primary" type="submit">Send</button>
       </form>
       <div class="card-group">
-        <div class="card" v-for="(message,index) in messages" :key="index">
+        <div class="card" v-for="(message,index) in messages.slice().reverse()" :key="index">
           <div class="card-block">
             <h4 class="card-title">{{ message.title }}</h4>
             <p class="card-text">{{ message.text }}</p>
             <p class="card-text">
-              <small class="text-muted">Added on {{ message.timestamp }}</small>
+              <small class="text-muted">Added on {{ dateToString(message.timestamp) }}</small>
             </p>
           </div>
         </div>
@@ -31,6 +31,7 @@
 // import HelloWorld from './components/HelloWorld'
 import Firebase from 'firebase'
 import config from './firebase-config.js'
+import { dateToString } from './utils/utils.js'
 
 let app = Firebase.initializeApp(config)
 
@@ -61,7 +62,8 @@ export default {
       this.newMessage.text = ''
       this.newMessage.title = ''
       this.newMessage.timestamp = null
-    }
+    },
+    dateToString
   }
 }
 </script>
