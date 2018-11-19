@@ -12,16 +12,18 @@
         </div>
         <button class="btn btn-primary" type="submit">Send</button>
       </form>
-      <div class="card-group">
-        <div class="card" v-for="(message,index) in messages.slice().reverse()" :key="index">
-          <div class="card-block">
-            <h4 class="card-title">{{ message.title }}</h4>
-            <p class="card-text">{{ message.text }}</p>
-            <p class="card-text">
-              <small class="text-muted">Added on {{ dateToString(message.timestamp) }}</small>
-            </p>
-          </div>
-        </div>
+      <hr>
+      <div class="card-columns">
+        <card
+        class="card-outline-success" :title="'Hello!'"
+        :text="'This is our Fixed'" :footer="'Added On' + dateToString(Date.now())"
+        ></card>
+        <card class="card" v-for="(message,index) in messages.slice().reverse()"
+        :key="index"
+        :title="message.title"
+        :text="message.text"
+        :footer="`Added On ${dateToString(message.timestamp)}`"
+        ></card>
       </div>
     </div>
   </div>
@@ -29,6 +31,7 @@
 
 <script>
 // import HelloWorld from './components/HelloWorld'
+import Card from './components/Card'
 import Firebase from 'firebase'
 import config from './firebase-config.js'
 import { dateToString } from './utils/utils.js'
@@ -39,6 +42,9 @@ let db = app.database()
 let messagesRef = db.ref('messages')
 export default {
   name: 'App',
+  components: {
+    Card
+  },
   firebase: {
     messages: messagesRef
   },
