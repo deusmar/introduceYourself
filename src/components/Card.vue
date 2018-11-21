@@ -2,14 +2,14 @@
   <div class="card">
     <div class="card-block">
       <h5 class="card-title">
-        {{title}}
+        {{this.message.title}}
       </h5>
       <p class="card-text">
-        {{text}}
+        {{this.message.text}}
       </p>
       <p class="card-text">
         <small class="text-muted">
-          {{footer}}
+          Added On {{dateToString(this.message.timestamp)}}
         </small>
       </p>
     </div>
@@ -17,8 +17,11 @@
 </template>
 
 <script>
+import { dateToString } from './../utils/utils.js'
 export default {
-  props: ['title','text','footer']  
+  props: ['message'],
+  methods: {
+    dateToString
+  }
 }
 </script>
-

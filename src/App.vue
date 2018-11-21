@@ -15,15 +15,9 @@
       <hr>
       <div class="card-columns">
         <card
-        class="card-outline-success" :title="'Hello!'"
-        :text="'This is our Fixed'" :footer="'Added On' + dateToString(Date.now())"
-        ></card>
+        class="card-outline-success" :message="{title:'Hello!',text:'This is our Fixed', timestamp:''}"></card>
         <card class="card" v-for="(message,index) in messages.slice().reverse()"
-        :key="index"
-        :title="message.title"
-        :text="message.text"
-        :footer="`Added On ${dateToString(message.timestamp)}`"
-        ></card>
+        :key="index" :message="message"></card>
       </div>
     </div>
   </div>
@@ -34,7 +28,6 @@
 import Card from './components/Card'
 import Firebase from 'firebase'
 import config from './firebase-config.js'
-import { dateToString } from './utils/utils.js'
 
 let app = Firebase.initializeApp(config)
 
@@ -68,8 +61,7 @@ export default {
       this.newMessage.text = ''
       this.newMessage.title = ''
       this.newMessage.timestamp = null
-    },
-    dateToString
+    }
   }
 }
 </script>
